@@ -10,72 +10,43 @@ const { response } = require("express");
 dotenv.config();
 
 const app = express();
-const port = process.env.PORT || "8080";
+const port = process.env.PORT || "8080"; //variable for ports
 
 const trakt = "https://api.trakt.tv";
-const imdb = `https://imdb-api.com/en/API/FullCast/${process.env.IMDB_CLIENT_ID}/tt1375666`;
+// const imdb = `https://imdb-api.com/en/API/FullCast/${process.env.IMDB_CLIENT_ID}/tt1375666`;
 
-var code, accessToken;
 var state;
-// var check = "tt1375666";
-var check;
+var check; //dummy varibale created to test a dummy api response
 var stateagain;
-var imdbid;
 
-// .catch(console.error);
-
-//LOCAL SSL CERTS
-/* var opts = {
-  ca: [fs.readFileSync("<path_to_rootkey>"), fs.readFileSync("<path_to_rootpem")],
-  key: fs.readFileSync("<path_to_key>"),
-  cert: fs.readFileSync("<path_to_crt>")
-}; */
-app.use(cors());
+app.use(cors()); //to avoid cors issue
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
-//set up static path (for use with CSS, client-side JS, and image files)
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/", (req, res) => {
-  displayPopularShow(res);
+  //api path to list all the popular movies
+  displayPopularShow(res); //function to get the json values asynchronously for the api path "/"
 });
 
 app.get("/cast", (req, res) => {
+  //dummy api for locally test the hardcoded cast value
   displayCast(res);
 });
 
 app.get("/cast/:id", (req, res) => {
-  var imdbid = req.params.id;
-  //   console.log(imdbid);
-  displayCastBasedOnId(res, imdbid);
+  //api path to list the full cast of the selected popular movie
+  var imdbid = req.params.id; //variable that stores the id parameter from the path
+  displayCastBasedOnId(res, imdbid); //function to get the json values asynchronously for the api path "/cast/:id"
 });
-
-// app.get("/movie", (req, res) => {
-//   let id = req.query.id;
-//   let library = displayCast(res,id);
-//   // let title = library.querySelector("name").textContent;
-
-//   res.render("library", { title: title, library: library });
-// });
-
-// app.get("/page-requiring-oauth", (req, res) => {});
-// app.get("/authorize", (req, res) => {});
 
 //server listening
 app.listen(port, () => {
+  //server listening with port 8080
   console.log(`Listening on http://localhost:${port}`);
-  //   console.log(state);
 });
-/*
-//HTTPS server
-var server = https.createServer(opts, app);
 
-server.listen(port, () => {
-  console.log(`Listening on https://localhost:${port}`);
-});
-*/
-
-//function to display popular shows
+//function to display popular movies
 function displayPopularShow(res) {
   var pageData = {
     title: "Show",
@@ -105,8 +76,6 @@ function displayPopularShow(res) {
         )
         .then((response) => {
           //   console.log(response.data);
-          // console.log(state);
-          // console.log("success");
         });
     })
     .catch(function (err) {
@@ -114,6 +83,7 @@ function displayPopularShow(res) {
     });
 }
 
+//dummy api to test the hard coded cast internally
 function displayCast(res) {
   var castData = {
     title: "Cast",
@@ -128,10 +98,10 @@ function displayCast(res) {
       //   console.log(stateagain);
       res.json(response.data);
       // console.log(state);
-      // console.log("success");
     });
 }
 
+//function to display the cast based on movie id
 function displayCastBasedOnId(res, id) {
   axios
     .get(
@@ -141,54 +111,8 @@ function displayCastBasedOnId(res, id) {
       console.log(response.data);
       res.json(response.data);
       //   console.log(state);
-      //   console.log("success");
     });
 }
-// axios
-//   .get(
-//     `https://imdb-api.com/en/API/FullCast/${process.env.IMDB_CLIENT_ID}/${check}`
-//   )
-//   .then((response) => {
-//     console.log(response.data);
-//   });
-
-// function displayCast(res, checkid) {
-//   var castData = {
-//     title: "Cast",
-//     casts: null,
-//   };
-// axios({
-//   url: "/shows/popular?page=1&limit=15",
-//   baseURL: trakt,
-//   method: "get",
-//   headers: {
-//     "Content-Type": "application/json",
-//     "trakt-api-version": 2,
-//     "trakt-api-key": process.env.TRAKT_CLIENT_ID,
-//   },
-// })
-//   .then(function (arg) {
-//     pageData.shows = arg.data;
-//     console.log(arg.data);
-//     res.render("popularShow", pageData);
-//   })
-//   .catch(function (err) {
-//     console.log(err);
-//   });
-
-//   axios
-//     .get(
-//       `https://imdb-api.com/en/API/FullCast/${process.env.IMDB_CLIENT_ID}/${checkid}`
-//     )
-//     .then(function (arg) {
-//       castData.casts = arg.data;
-//       console.log(arg.data);
-//       res.render("cast", castData);
-//     })
-//     .catch(function (err) {
-//       console.log(err);
-//     });
-// }
 
 app.use(express.static(path.join(__dirname, "/frontend/build")));
 
