@@ -6,9 +6,9 @@ TRAKT_CLIENT_SECRET=ae5ce9b8e4d9c0ca49ee97a029005f722df8de9374028b12d88bfde847b7
 
 # Backend
 
-cd to the api/ location then run the command "npm run start" to start the backend server.
+Open a new terminal cd to the api/ location then run the command "npm run start" to start the backend server.
 
 # Frontend
 
-cd to api/frontend/ location then run the command "npm run" to start the react frontend.
+Keep the above mentioned backend running under a terminal.Now open a new terminal cd to api/frontend/ location then run the command "npm run" to start the react frontend.
 
