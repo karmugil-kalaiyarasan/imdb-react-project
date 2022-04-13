@@ -1,0 +1,9 @@
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* position: relative; */
+  height: 80px;
+  background: linear-gradient(0deg, #1a1a1a, #4d4d4d 40%, #1a1a1a);
+  color: white;
+}

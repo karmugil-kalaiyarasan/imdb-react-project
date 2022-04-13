@@ -1,0 +1,37 @@
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.actors,
+.director,
+.writer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.actors > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.director > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.writer > div {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+/* .heading {
+  background-color: #e6e6e6;
+} */
+/* .actor-cards {
+  margin: 30px;
+} */

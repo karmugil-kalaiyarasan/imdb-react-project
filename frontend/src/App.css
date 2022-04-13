@@ -1,0 +1,37 @@
+/* * {
+  background-color: cyan;
+} */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  display-items: center;
+}
+
+.cast {
+  display: flex;
+  flex-direction: column;
+}
+/* .moviebox {
+  padding: 50px;
+  background-color: red;
+} */
+.header {
+  width: 100%;
+}
+
+.movie {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.movie > div {
+  display: flex;
+  flex-direction: row;
+  flex: 3;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
